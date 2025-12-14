@@ -1,0 +1,53 @@
+.prompt-edit-container,
+.prompt-edit-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+.prompt-edit-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+}
+
+.prompt-edit-label {
+  margin-bottom: 4px;
+}
+
+.prompt-edit-input {
+  background-color: #212121;
+  position: relative;
+  width: 100%;
+  & input,
+  & textarea {
+    box-sizing: border-box;
+    padding: 8px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    outline: none;
+    background-color: transparent;
+    height: 38px;
+    &:focus {
+      border: 1px solid white;
+    }
+  }
+
+  & textarea {
+    resize: none;
+    height: 86px;
+  }
+}
+
+.prompt-edit-actions {
+  display: flex;
+  margin-top: auto;
+  gap: 8px;
+  & .btn,
+  & .btn-secondary {
+    flex: 1;
+  }
+}

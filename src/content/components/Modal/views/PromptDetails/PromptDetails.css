@@ -1,0 +1,62 @@
+.prompt-details-container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.prompt-details-sidebar {
+  flex: 1;
+  height: 100%;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.prompt-details-content {
+  flex: 2;
+  height: 100%;
+  padding-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.prompt-details-sidebar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 14px;
+}
+
+.prompt-details-sidebar-item-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.prompt-details-sidebar-item-value {
+  color: white;
+}
+
+.prompt-details-content-title {
+  font-size: 16px;
+  font-weight: medium;
+}
+
+.prompt-details-content-content {
+  margin-top: 12px;
+  font-size: 14px;
+  padding: 8px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+}
+
+.prompt-details-container .btn,
+.prompt-details-container .btn-secondary {
+  flex: 1;
+}
+
+.prompt-details-content-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: auto;
+  width: 100%;
+}
