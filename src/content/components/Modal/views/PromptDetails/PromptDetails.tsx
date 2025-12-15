@@ -44,17 +44,6 @@ export default function PromptDetails({ promptId }: PromptDetailsProps) {
         <div className="prompt-details-sidebar">
           <div className="prompt-details-sidebar-item">
             <span className="prompt-details-sidebar-item-label">
-              Last updated:
-            </span>
-            <span className="prompt-details-sidebar-item-value">
-              {new Intl.DateTimeFormat(undefined, {
-                dateStyle: "short",
-                timeStyle: "short",
-              }).format(prompt.updatedAt)}
-            </span>
-          </div>
-          <div className="prompt-details-sidebar-item">
-            <span className="prompt-details-sidebar-item-label">
               Created at:
             </span>
             <span className="prompt-details-sidebar-item-value">
