@@ -18,9 +18,13 @@ interface StoredUpdateCheck {
 }
 
 function compareVersions(current: string, latest: string): boolean {
-  const normalize = (v: string) => v.replace(/^v/, "");
-  const c = normalize(current).split(".").map(Number);
-  const l = normalize(latest).split(".").map(Number);
+  const extract = (v: string) => {
+    const match = v.match(/(\d+\.\d+\.\d+)|(\d+\.\d+)/);
+    return match ? match[0] : v.replace(/^v/, "");
+  };
+
+  const c = extract(current).split(".").map(Number);
+  const l = extract(latest).split(".").map(Number);
 
   for (let i = 0; i < Math.max(c.length, l.length); i++) {
     const cv = c[i] || 0;
@@ -39,8 +43,16 @@ async function fetchLatestRelease(): Promise<ReleaseInfo | null> {
     if (!response.ok) return null;
 
     const data = await response.json();
+
+    let rawVersion = data.tag_name;
+    const hasVersionInTag = /(\d+\.\d+)/.test(rawVersion);
+
+    if (!hasVersionInTag && data.name) {
+      rawVersion = data.name;
+    }
+
     return {
-      version: data.tag_name || data.name,
+      version: rawVersion,
       changelog: data.body || "",
       url: data.html_url,
     };
