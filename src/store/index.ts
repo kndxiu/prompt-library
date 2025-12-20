@@ -1,5 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import promptsReducer, { syncPrompts } from "./slices/promptsSlice";
+import promptsReducer, {
+  syncPrompts,
+} from "@features/prompts/store/promptsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -19,7 +21,6 @@ if (
     if (areaName === "local" && changes["prompts"]) {
       const { newValue } = changes["prompts"];
       if (newValue) {
-        console.log("[Store] Syncing prompts:", newValue);
         store.dispatch(syncPrompts(newValue));
       }
     }

@@ -2,34 +2,25 @@ import { createRoot, type Root } from "react-dom/client";
 import PromptButton from "./components/PromptButton";
 import buttonStyles from "./components/PromptButton.css?inline";
 import { Provider } from "react-redux";
-import { store } from "../store";
-import { NavigationProvider } from "./context/NavigationContext";
+import { store } from "@store/index";
+import { NavigationProvider } from "@shared/contexts";
+import { getSiteProvider } from "@shared/sites";
+import { createShadowHost } from "@content/bootstrap";
+import { siteThemes } from "@shared/theme/sites";
 
-export const attachButton = (input: HTMLDivElement) => {
-  const findContainer = (): Node | null => {
-    const deepContainer =
-      input.parentElement?.parentElement?.parentElement?.lastChild?.firstChild;
-    if (deepContainer) return deepContainer;
+export const attachButton = (input: HTMLElement) => {
+  const provider = getSiteProvider();
+  if (!provider) return;
 
-    return input.parentElement;
-  };
+  const themeCss = provider.themeId ? siteThemes[provider.themeId] || "" : "";
 
-  const container = findContainer();
-  if (!container) return;
-
-  const host = document.createElement("div");
-  host.className = "prompt-library-host";
-  host.style.position = "relative";
-  host.style.display = "inline-block";
-
-  const shadow = host.attachShadow({ mode: "open" });
-
-  const style = document.createElement("style");
-  style.textContent = buttonStyles;
-  shadow.appendChild(style);
-
-  const mountPoint = document.createElement("div");
-  shadow.appendChild(mountPoint);
+  const {
+    host,
+    mountPoint,
+    cleanup: cleanupHost,
+  } = createShadowHost({
+    additionalStyles: buttonStyles + themeCss,
+  });
 
   let root: Root | null = createRoot(mountPoint);
 
@@ -41,18 +32,14 @@ export const attachButton = (input: HTMLDivElement) => {
     </Provider>
   );
 
-  if (container.firstChild) {
-    container.insertBefore(host, container.firstChild);
-  } else {
-    container.appendChild(host);
-  }
+  provider.injectButton(input, host);
 
   const cleanup = () => {
+    cleanupHost();
     if (root) {
       root.unmount();
       root = null;
     }
-    host.remove();
   };
 
   return cleanup;

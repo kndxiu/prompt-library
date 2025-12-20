@@ -1,0 +1,75 @@
+.btn {
+  flex: none;
+  height: 36px;
+  padding-inline: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--pl-btn-primary-text);
+  background-color: var(--pl-btn-primary-bg);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: var(--pl-transition-colors);
+  font-family: inherit;
+  font-size: inherit;
+
+  &:hover {
+    background-color: var(--pl-btn-primary-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-secondary {
+  flex: none;
+  height: 36px;
+  padding-inline: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  color: var(--pl-btn-secondary-text);
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: var(--pl-btn-secondary-bg);
+  transition: var(--pl-transition-colors);
+  font-family: inherit;
+  font-size: inherit;
+
+  &:hover {
+    background-color: var(--pl-btn-secondary-hover);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: var(--pl-text-primary);
+  transition: var(--pl-transition-colors);
+
+  &:hover {
+    background-color: var(--pl-btn-secondary-hover);
+  }
+}

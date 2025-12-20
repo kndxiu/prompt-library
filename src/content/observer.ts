@@ -1,54 +1,46 @@
-export const observeInputs = (
-  onFound: (input: HTMLDivElement) => (() => void) | void
-) => {
-  const activeElements = new Map<HTMLElement, (() => void) | void>();
-  let timeoutId: ReturnType<typeof setTimeout> | null = null;
+import { getSiteProvider } from "@shared/sites";
 
-  const performScan = () => {
-    for (const [element, cleanup] of activeElements.entries()) {
-      if (!element.isConnected) {
-        if (typeof cleanup === "function") cleanup();
-        activeElements.delete(element);
-      }
-    }
+let observer: MutationObserver | null = null;
+const activeElements = new WeakMap<HTMLElement, (() => void) | null>();
+let debounceTimer: ReturnType<typeof setTimeout> | null = null;
 
-    const inputs = document.querySelectorAll(
-      "div[contentEditable='true'], textarea, input[type='text']"
-    );
+export function observeInputs(
+  onFound: (element: HTMLElement) => (() => void) | void
+) {
+  if (observer) observer.disconnect();
 
+  const provider = getSiteProvider();
+
+  if (!provider) return;
+
+  const selector = provider.inputSelector;
+
+  const scan = () => {
+    const inputs = document.querySelectorAll(selector);
     inputs.forEach((node) => {
       if (node instanceof HTMLElement && node.offsetParent !== null) {
         if (!activeElements.has(node)) {
-          // Initialize component and store cleanup
-          const cleanupFn = onFound(node as HTMLDivElement);
-          activeElements.set(node, cleanupFn);
+          const cleanupFn = onFound(node);
+          activeElements.set(node, cleanupFn || null);
         }
       }
     });
   };
 
   const debouncedScan = () => {
-    if (timeoutId) clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      performScan();
-      timeoutId = null;
-    }, 300);
+    if (debounceTimer) clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(scan, 1000);
   };
 
-  performScan();
-
-  const observer = new MutationObserver((mutations) => {
+  observer = new MutationObserver((mutations) => {
     let shouldScan = false;
     for (const mutation of mutations) {
-      if (mutation.type === "childList") {
+      if (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0) {
         shouldScan = true;
         break;
       }
     }
-
-    if (shouldScan) {
-      debouncedScan();
-    }
+    if (shouldScan) debouncedScan();
   });
 
   observer.observe(document.body, {
@@ -56,12 +48,5 @@ export const observeInputs = (
     subtree: true,
   });
 
-  return () => {
-    observer.disconnect();
-    if (timeoutId) clearTimeout(timeoutId);
-    for (const cleanup of activeElements.values()) {
-      if (typeof cleanup === "function") cleanup();
-    }
-    activeElements.clear();
-  };
-};
+  scan();
+}

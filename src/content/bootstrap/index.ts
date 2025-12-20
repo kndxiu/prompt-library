@@ -1,0 +1,1 @@
+export { createShadowHost } from "./createShadowHost";

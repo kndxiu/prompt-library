@@ -1,31 +1,46 @@
 import modalStyles from "./components/Modal/Modal.css?inline";
+import { detectHostTheme, watchHostTheme } from "@shared/theme";
+import { getSiteProvider } from "@shared/sites";
+import { siteThemes } from "@shared/theme/sites";
 
 let modalShadowRoot: ShadowRoot | null = null;
 let modalContainer: HTMLDivElement | null = null;
 
-export const getModalRoot = () => {
-  if (modalContainer && modalShadowRoot) {
-    return modalContainer;
-  }
+export const getModalRoot = (): HTMLDivElement => {
+  if (modalContainer) return modalContainer;
 
-  const host = document.createElement("div");
-  host.id = "prompt-library-modal-host";
-  host.style.position = "fixed";
-  host.style.top = "0";
-  host.style.left = "0";
-  host.style.width = "0";
-  host.style.height = "0";
-  host.style.zIndex = "1000";
+  const hostElement = document.createElement("div");
+  hostElement.id = "prompt-library-modal-host";
+  hostElement.style.position = "fixed";
+  hostElement.style.top = "0";
+  hostElement.style.left = "0";
+  hostElement.style.width = "0";
+  hostElement.style.height = "0";
+  hostElement.style.zIndex = "1000";
 
-  document.body.appendChild(host);
+  const applyTheme = () => {
+    const theme = detectHostTheme();
+    hostElement.classList.remove("theme-light", "theme-dark");
+    hostElement.classList.add(`theme-${theme}`);
+  };
+  applyTheme();
 
-  modalShadowRoot = host.attachShadow({ mode: "open" });
+  watchHostTheme(applyTheme);
+
+  document.body.appendChild(hostElement);
+
+  modalShadowRoot = hostElement.attachShadow({ mode: "open" });
+
+  const provider = getSiteProvider();
+  const themeCss = provider?.themeId ? siteThemes[provider.themeId] || "" : "";
 
   const style = document.createElement("style");
-  style.textContent = modalStyles;
+  style.textContent = themeCss + modalStyles;
+
   modalShadowRoot.appendChild(style);
 
   modalContainer = document.createElement("div");
+  modalContainer.id = "prompt-library-modal-root";
   modalShadowRoot.appendChild(modalContainer);
 
   return modalContainer;

@@ -1,5 +1,5 @@
 import { ArrowLeft, X } from "lucide-react";
-import { useNavigation } from "../../context/shared";
+import { useNavigation } from "@shared/contexts";
 
 export default function ModalContent() {
   const { currentView, popView, close } = useNavigation();
