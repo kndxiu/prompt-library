@@ -1,36 +1,59 @@
-# Prompt Library (Chrome Extension)
+# Prompt Library
 
-Chrome Extension that helps you manage AI prompts and insert them directly into ChatGPT.
+A browser extension for saving and inserting reusable prompts directly into AI chat interfaces like ChatGPT.
 
-## How it works
+It adds a small, native-feeling UI to the chat input, so you can insert prompts without switching tabs or breaking context.
 
-The extension injects a button next to the chat input on supported websites. Clicking it opens a modal where you can select a prompt to insert.
+![Screenshot](https://raw.githubusercontent.com/kndxiu/prompt-library/main/public/screenshot.png)
 
-- **Storage**: Prompts are saved in `chrome.storage.local`, so they sync across all your open tabs.
-- **Tech**: Built with React 19, TypeScript, and Redux Toolkit.
-- **Dev**: Uses Vite with HMR for fast development.
+---
 
-## Setup
+## Features
 
-1. `npm install`
-2. `npm run dev`
-3. Load the `dist` folder into Chrome (`chrome://extensions` > Load unpacked).
+- One-click prompt insertion directly into the chat input
+- UI automatically matches light/dark mode of the host site
+- Prompts stored locally
+- Built-in update checker with changelog
+- Modular provider system for supporting multiple AI platforms
+
+---
+
+## Tech Stack
+
+- React 19 + TypeScript
+- Redux Toolkit
+- Vite + CRXJS
+- Vanilla CSS (Shadow DOM)
+
+---
 
 ## Development
 
-The project is built with Vite and supports Hot Module Replacement (HMR).
+git clone https://github.com/kndxiu/prompt-library.git
+cd prompt-library
+npm install
+npm run dev
 
-### Commands
+Load the dist folder via chrome://extensions with Developer mode enabled.
 
-| Command         | Description                                                         |
-| --------------- | ------------------------------------------------------------------- |
-| `npm run dev`   | Starts dev server. Code changes reload the extension automatically. |
-| `npm run build` | Compiles the production build into `dist` folder.                   |
-| `npm run lint`  | Runs eslint to check for code issues.                               |
+---
 
-### Project Layout
+## Build
 
-- `src/content`: Script injected into the web page (UI, buttons).
-- `src/background`: Service worker (currently inactive).
-- `src/store`: Redux logic for state management.
-- `src/shared`: Shared types and utilities.
+npm run build
+
+---
+
+## Project Structure
+
+- src/features – Feature-specific logic
+- src/content – Content scripts injected into host pages
+- src/shared – Shared UI and utilities
+- src/store – Global state
+- src/shared/sites/providers – Site-specific adapters
+
+---
+
+## License
+
+MIT © kndxiu
