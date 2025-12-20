@@ -4,7 +4,7 @@ A browser extension for saving and inserting reusable prompts directly into AI c
 
 It adds a small, native-feeling UI to the chat input, so you can insert prompts without switching tabs or breaking context.
 
-![Screenshot](https://raw.githubusercontent.com/kndxiu/prompt-library/main/public/screenshot.png)
+![Screenshot](public/screenshot.png)
 
 ---
 
@@ -29,28 +29,32 @@ It adds a small, native-feeling UI to the chat input, so you can insert prompts 
 
 ## Development
 
+```bash
 git clone https://github.com/kndxiu/prompt-library.git
 cd prompt-library
 npm install
 npm run dev
+```
 
-Load the dist folder via chrome://extensions with Developer mode enabled.
+Load the `dist` folder via `chrome://extensions` with **Developer mode** enabled.
 
 ---
 
 ## Build
 
+```bash
 npm run build
+```
 
 ---
 
 ## Project Structure
 
-- src/features – Feature-specific logic
-- src/content – Content scripts injected into host pages
-- src/shared – Shared UI and utilities
-- src/store – Global state
-- src/shared/sites/providers – Site-specific adapters
+- **src/features** – Feature-specific logic
+- **src/content** – Content scripts injected into host pages
+- **src/shared** – Shared UI and utilities
+- **src/store** – Global state
+- **src/shared/sites/providers** – Site-specific adapters
 
 ---
 
