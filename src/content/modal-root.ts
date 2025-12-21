@@ -1,4 +1,5 @@
 import modalStyles from "./components/Modal/Modal.css?inline";
+import buttonStyles from "@shared/ui/Button/Button.css?inline";
 import { detectHostTheme, watchHostTheme } from "@shared/theme";
 import { getSiteProvider } from "@shared/sites";
 import { siteThemes } from "@shared/theme/sites";
@@ -35,7 +36,7 @@ export const getModalRoot = (): HTMLDivElement => {
   const themeCss = provider?.themeId ? siteThemes[provider.themeId] || "" : "";
 
   const style = document.createElement("style");
-  style.textContent = themeCss + modalStyles;
+  style.textContent = themeCss + modalStyles + buttonStyles;
 
   modalShadowRoot.appendChild(style);
 

@@ -1,2 +1,94 @@
-/* Claude Theme Adapter */
-/* Placeholder for future specific overrides */
+:host,
+.prompt-library-root {
+  --pl-bg-primary: #262624;
+  --pl-bg-secondary: #30302e;
+  --pl-bg-tertiary: #1f1e1d;
+  --pl-bg-overlay: rgba(0, 0, 0, 0.475);
+
+  --pl-text-primary: #ececf1;
+  --pl-text-secondary: rgba(255, 255, 255, 0.8);
+  --pl-text-muted: #b4b4b4;
+
+  --pl-border-primary: rgba(255, 255, 255, 0.1);
+  --pl-border-secondary: rgba(255, 255, 255, 0.05);
+
+  --pl-btn-primary-bg: #c6613f;
+  --pl-btn-primary-text: #ffffff;
+  --pl-btn-primary-hover: #d97757;
+
+  --pl-btn-secondary-bg: transparent;
+  --pl-btn-secondary-text: #dedcd1;
+  --pl-btn-secondary-hover: #1f1e1d;
+
+  --pl-shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  --pl-btn-icon-hover: #1f1e1d;
+  --pl-tooltip-bg: #000000;
+  --pl-tooltip-text: #ffffff;
+
+  --pl-transition: all 0.3s ease;
+}
+
+:host(.theme-light),
+.prompt-library-root.theme-light {
+  --pl-bg-primary: #ffffff;
+  --pl-bg-secondary: #f7f7f8;
+  --pl-bg-tertiary: rgba(0, 0, 0, 0.05);
+  --pl-bg-overlay: rgba(0, 0, 0, 0.3);
+
+  --pl-text-primary: #343541;
+  --pl-text-secondary: rgba(0, 0, 0, 0.8);
+  --pl-text-muted: rgba(0, 0, 0, 0.5);
+
+  --pl-border-primary: rgba(0, 0, 0, 0.1);
+  --pl-border-secondary: rgba(0, 0, 0, 0.05);
+
+  --pl-btn-primary-bg: #000000;
+  --pl-btn-primary-text: #ffffff;
+  --pl-btn-primary-hover: #4c4c4c;
+
+  --pl-btn-secondary-bg: transparent;
+  --pl-btn-secondary-text: #000000;
+  --pl-btn-secondary-hover: rgba(0, 0, 0, 0.05);
+
+  --pl-shadow-modal: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  --pl-btn-icon-hover: rgba(0, 0, 0, 0.025);
+  --pl-tooltip-bg: #000000;
+  --pl-tooltip-text: #ffffff;
+
+  --pl-transition: all 0.3s cubic-bezier(0.165, 0.85, 0.45, 1);
+}
+
+.prompt-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px !important;
+  color: #c2c0b6 !important;
+  &::before {
+    right: 50%;
+    top: 100%;
+    border-radius: 6px;
+    transform: translate(50%, 6px);
+  }
+  svg {
+    stroke-width: 1.5 !important;
+  }
+}
+
+.prompt-card .modal-button:hover {
+  background-color: var(--pl-bg-secondary);
+}
+
+.prompt-edit-input,
+.prompt-list-search {
+  background-color: var(--pl-bg-secondary) !important;
+  input,
+  textarea {
+    border: 1px solid transparent !important;
+    &:focus,
+    &:hover {
+      border: 1px solid rgba(255, 255, 255, 0.075) !important;
+    }
+  }
+}

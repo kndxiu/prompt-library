@@ -24,7 +24,7 @@ export default function PromptEdit({ prompt }: PromptEditProps) {
       ? (document.querySelector(provider.inputSelector) as HTMLElement)
       : null;
 
-    return (input as HTMLInputElement)?.value || input?.innerText || "";
+    return (input as HTMLInputElement)?.value || input?.innerText?.trim() || "";
   }, []);
 
   const handleSave = () => {
@@ -61,7 +61,7 @@ export default function PromptEdit({ prompt }: PromptEditProps) {
   };
 
   const handleImport = () => {
-    if (!defaultContent || content) return;
+    if (!defaultContent || content.trim().length > 0) return;
     setContent(defaultContent);
   };
 
@@ -122,7 +122,11 @@ export default function PromptEdit({ prompt }: PromptEditProps) {
           </div>
         </div>
         <div className="prompt-edit-actions">
-          <button className="btn" onClick={handleSave}>
+          <button
+            disabled={!title || !content}
+            className="btn"
+            onClick={handleSave}
+          >
             Save
           </button>
           <button className="btn-secondary" onClick={handleCancel}>

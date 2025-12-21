@@ -11,6 +11,8 @@
   cursor: pointer;
   padding: 0;
   margin: 0;
+  color: var(--pl-btn-secondary-text);
+  transition: var(--pl-transition);
 
   &::before {
     content: "Prompt Library";
@@ -30,7 +32,7 @@
   }
 
   &:hover {
-    background-color: var(--pl-btn-icon-hover);
+    background-color: var(--pl-btn-secondary-hover);
     &::before {
       display: block;
     }

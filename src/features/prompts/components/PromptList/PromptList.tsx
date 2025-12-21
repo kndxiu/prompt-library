@@ -45,6 +45,7 @@ export default function PromptList() {
       <div className="prompt-list-container">
         <div className="prompt-list-search">
           <input
+            id="prompt-serch"
             type="text"
             placeholder="Search prompts..."
             onChange={(e) => setSearchQuery(e.target.value)}

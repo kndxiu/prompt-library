@@ -2,8 +2,8 @@
   "name": "prompt-library",
   "private": true,
   "description": "Professional AI Prompt Manager for Chrome",
-  "version": "1.0.0",
-  "author": "Your Name",
+  "version": "1.0.1",
+  "author": "kndxiu",
   "license": "MIT",
   "type": "module",
   "scripts": {

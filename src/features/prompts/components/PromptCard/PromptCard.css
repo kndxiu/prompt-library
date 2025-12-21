@@ -8,6 +8,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  transition: var(--pl-transition);
 
   & .modal-button {
     opacity: 0;
@@ -32,6 +33,7 @@
   display: flex;
   align-items: center;
   position: relative;
+  transition: var(--pl-transition);
   &:hover {
     .prompt-card-options-list {
       opacity: 1;
@@ -77,6 +79,7 @@
   background-color: transparent;
   color: var(--pl-text-primary);
   cursor: pointer;
+  transition: var(--pl-transition);
 
   &:hover {
     background-color: var(--pl-btn-secondary-hover);

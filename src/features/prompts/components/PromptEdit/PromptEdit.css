@@ -20,6 +20,8 @@
   background-color: var(--pl-bg-primary);
   position: relative;
   width: 100%;
+  border-radius: 8px;
+  display: flex;
   & input,
   & textarea {
     box-sizing: border-box;
@@ -31,6 +33,7 @@
     background-color: transparent;
     color: var(--pl-text-primary);
     height: 38px;
+    transition: var(--pl-transition);
 
     &:focus {
       border: 1px solid var(--pl-text-primary);

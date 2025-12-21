@@ -10,6 +10,7 @@
   position: relative;
   width: 100%;
   margin-bottom: 12px;
+  border-radius: 8px;
   & input {
     box-sizing: border-box;
     padding: 8px 36px;
@@ -20,6 +21,7 @@
     background-color: transparent;
     color: var(--pl-text-primary);
     height: 38px;
+    transition: var(--pl-transition);
 
     & ~ .prompt-list-search-icon {
       color: var(--pl-text-muted);

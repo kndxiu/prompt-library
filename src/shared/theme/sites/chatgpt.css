@@ -25,6 +25,8 @@
   --pl-btn-icon-hover: rgba(255, 255, 255, 0.1);
   --pl-tooltip-bg: #000000;
   --pl-tooltip-text: #ffffff;
+
+  --pl-transition: none;
 }
 
 :host(.theme-light),

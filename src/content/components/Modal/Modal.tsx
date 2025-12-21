@@ -13,7 +13,14 @@ export default function Modal({ onClose }: ModalProps) {
   };
 
   return (
-    <div className="modal-overlay" onClick={handleOverlayClick}>
+    <div
+      className="modal-overlay"
+      onClick={handleOverlayClick}
+      onKeyDown={(e) => e.stopPropagation()}
+      onKeyUp={(e) => e.stopPropagation()}
+      onKeyPress={(e) => e.stopPropagation()}
+      onPaste={(e) => e.stopPropagation()}
+    >
       <ModalContent />
     </div>
   );
