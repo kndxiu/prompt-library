@@ -50,9 +50,8 @@
 
 .prompt-list-prompts {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-auto-rows: max-content;
-
   gap: 8px;
   height: 208px;
   overflow-y: auto;

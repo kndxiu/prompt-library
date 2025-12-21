@@ -13,10 +13,6 @@
   }
 }
 
-.prompt-card .modal-button:hover {
-  background-color: var(--pl-bg-secondary);
-}
-
 .prompt-edit-input,
 .prompt-list-search {
   background-color: var(--pl-bg-secondary) !important;

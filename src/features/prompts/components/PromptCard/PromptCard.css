@@ -1,54 +1,74 @@
 .prompt-card {
-  padding: 8px;
   background-color: var(--pl-bg-secondary);
   border: 1px solid var(--pl-border-primary);
   border-radius: 8px;
   display: flex;
-  height: min-content;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
+  height: 44px;
+  box-sizing: border-box;
   transition: var(--pl-transition);
-
-  & .modal-button {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+  width: 100%;
+  min-width: 0;
+  .prompt-card-actions {
+    display: none;
   }
-  &:hover {
-    background-color: var(--pl-btn-secondary-hover);
-    & .modal-button {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: all;
+  &:hover,
+  &.is-open {
+    .prompt-card-actions {
+      display: flex;
     }
   }
 }
 
+.prompt-card:has(.prompt-card-content:hover) {
+  background-color: var(--pl-btn-secondary-hover);
+  cursor: pointer;
+}
+
+.prompt-card-content {
+  display: flex;
+  width: 100%;
+  padding-inline: 8px;
+  height: 44px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.prompt-card-actions {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  padding-left: 0;
+  transition: var(--pl-transition);
+  flex-shrink: 0;
+}
+
 .prompt-card-title {
   font-size: 14px;
+  text-align: left;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
 }
 
 .prompt-card-options {
   display: flex;
   align-items: center;
   position: relative;
-  transition: var(--pl-transition);
-  &:hover {
-    .prompt-card-options-list {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: all;
-      background-color: var(--pl-bg-secondary);
-    }
-  }
 }
 
 .prompt-card-options-list {
   position: absolute;
   top: 100%;
   right: 0;
-  background-color: var(--pl-bg-primary);
+  background-color: var(--pl-bg-secondary);
   border-radius: 8px;
   padding: 4px;
   display: flex;
