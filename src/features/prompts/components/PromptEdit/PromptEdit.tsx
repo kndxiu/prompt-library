@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { Prompt } from "../../types";
 import { useNavigation } from "@shared/contexts";
 import styles from "./PromptEdit.css?inline";
 import { addPrompt, updatePrompt } from "../../store/promptsSlice";
 import { useAppDispatch } from "@store/hooks";
+import { getSiteProvider } from "@shared/sites";
 
 interface PromptEditProps {
   prompt?: Prompt;
@@ -16,6 +17,15 @@ export default function PromptEdit({ prompt }: PromptEditProps) {
   const [title, setTitle] = useState(prompt?.title || "");
   const [tags, setTags] = useState(prompt?.tags || []);
   const [content, setContent] = useState(prompt?.content || "");
+
+  const defaultContent = useMemo(() => {
+    const provider = getSiteProvider();
+    const input = provider?.inputSelector
+      ? (document.querySelector(provider.inputSelector) as HTMLElement)
+      : null;
+
+    return (input as HTMLInputElement)?.value || input?.innerText || "";
+  }, []);
 
   const handleSave = () => {
     if (!title || !content) return;
@@ -48,6 +58,11 @@ export default function PromptEdit({ prompt }: PromptEditProps) {
 
   const handleCancel = () => {
     popView();
+  };
+
+  const handleImport = () => {
+    if (!defaultContent || content) return;
+    setContent(defaultContent);
   };
 
   return (
@@ -89,6 +104,14 @@ export default function PromptEdit({ prompt }: PromptEditProps) {
             Content
           </label>
           <div className="prompt-edit-input">
+            {defaultContent && !content && (
+              <button
+                className="btn btn-small prompt-edit-import-btn"
+                onClick={handleImport}
+              >
+                Import from input
+              </button>
+            )}
             <textarea
               id="prompt-content"
               placeholder="Prompt content"

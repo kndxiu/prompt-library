@@ -43,6 +43,12 @@
   }
 }
 
+.prompt-edit-import-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+
 .prompt-edit-actions {
   display: flex;
   margin-top: auto;

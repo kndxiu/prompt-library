@@ -30,7 +30,6 @@
   flex-direction: column;
   border: 1px solid var(--pl-border-primary);
   overflow: hidden;
-  transition: var(--pl-transition-colors);
 }
 
 .modal-header {
@@ -48,7 +47,6 @@
   color: var(--pl-text-primary);
   margin: 0;
   flex: 1;
-  transition: var(--pl-transition-colors);
 }
 
 .modal-button {
@@ -62,7 +60,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: var(--pl-transition-colors);
   &:hover {
     background-color: var(--pl-btn-secondary-hover);
   }
@@ -102,10 +99,16 @@
   border: none;
   outline: none;
   cursor: pointer;
-  transition: var(--pl-transition-colors);
   &:hover {
     background-color: var(--pl-btn-primary-hover);
   }
+}
+
+.btn-small {
+  height: 24px;
+  padding-inline: 0.5rem;
+  border-radius: 4px;
+  font-size: 12px;
 }
 
 .btn-secondary {
@@ -122,7 +125,6 @@
   outline: none;
   cursor: pointer;
   background-color: var(--pl-btn-secondary-bg);
-  transition: var(--pl-transition-colors);
   &:hover {
     background-color: var(--pl-btn-secondary-hover);
   }
