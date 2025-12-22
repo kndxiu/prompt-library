@@ -1,4 +1,4 @@
-export const APP_VERSION = "1.0.1";
+export const APP_VERSION = "1.0.3";
 export const GITHUB_REPO = "kndxiu/prompt-library";
 export const UPDATE_CHECK_INTERVAL_MS = 12 * 60 * 60 * 1000;
 export const HOST_CLASS_NAME = "prompt-library-host";

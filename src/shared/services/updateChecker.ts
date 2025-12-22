@@ -67,7 +67,7 @@ export async function checkForUpdate(): Promise<ReleaseInfo | null> {
 
   const now = Date.now();
 
-  if (check && now - check.lastCheck < UPDATE_CHECK_INTERVAL_MS && false) {
+  if (check && now - check.lastCheck < UPDATE_CHECK_INTERVAL_MS) {
     if (
       check.latestVersion &&
       compareVersions(APP_VERSION, check.latestVersion)
