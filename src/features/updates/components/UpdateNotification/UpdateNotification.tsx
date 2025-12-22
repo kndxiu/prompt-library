@@ -3,13 +3,14 @@ import type { ReleaseInfo } from "@shared/services/updateChecker";
 import { dismissUpdate } from "@shared/services/updateChecker";
 import { useNavigation } from "@shared/contexts";
 import styles from "./UpdateNotification.css?inline";
+import { HowToDownload } from "../HowToDownload/HowToDownload";
 
 interface UpdateNotificationProps {
   release: ReleaseInfo;
 }
 
 export function UpdateNotification({ release }: UpdateNotificationProps) {
-  const { close } = useNavigation();
+  const { close, pushView } = useNavigation();
 
   const handleDownload = () => {
     window.open(release.url, "_blank");
@@ -20,13 +21,26 @@ export function UpdateNotification({ release }: UpdateNotificationProps) {
     close();
   };
 
+  const handleHowTo = () => {
+    pushView({
+      title: "Help",
+      content: <HowToDownload />,
+      hasBackBtn: true,
+    });
+  };
+
   return (
     <>
       <style>{styles}</style>
       <div className="update-notification">
         <div className="update-notification__header">
           <h2>New Version Available</h2>
-          <p>Version {release.version} is ready to download</p>
+          <div className="update-notification__description">
+            <p>Version {release.version} is ready to download</p>
+            <button className="update-notification__link" onClick={handleHowTo}>
+              How to download?
+            </button>
+          </div>
         </div>
 
         <div className="update-notification__changelog">

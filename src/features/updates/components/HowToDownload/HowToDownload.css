@@ -1,0 +1,47 @@
+.how-to-download {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+}
+
+.how-to-download__header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: var(--pl-text-primary);
+}
+
+.how-to-download__header p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--pl-text-muted);
+}
+
+.how-to-download__content {
+  flex: 1;
+  overflow-y: auto;
+  padding-inline: 12px;
+  background: var(--pl-bg-tertiary);
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--pl-text-secondary);
+  line-height: 1.6;
+}
+
+.how-to-download__note {
+  color: var(--pl-text-muted);
+  font-size: 12px;
+}
+
+.how-to-download__content p {
+  margin-bottom: 8px;
+}
+
+.how-to-download__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.how-to-download__actions button {
+  flex: 1;
+}
