@@ -1,11 +1,14 @@
 import type { ThemeMode } from "@shared/theme/types";
 import { detectHostTheme, watchHostTheme } from "@shared/theme";
 
+import { HOST_CLASS_NAME } from "@shared/constants";
+
 interface ShadowHostOptions {
   id?: string;
   className?: string;
   additionalStyles?: string;
   fixed?: boolean;
+  skipThemeWatch?: boolean;
 }
 
 interface ShadowHostResult {
@@ -20,9 +23,10 @@ export function createShadowHost(
 ): ShadowHostResult {
   const {
     id,
-    className = "prompt-library-host",
+    className = HOST_CLASS_NAME,
     additionalStyles = "",
     fixed = false,
+    skipThemeWatch = false,
   } = options;
 
   const host = document.createElement("div");
@@ -43,13 +47,17 @@ export function createShadowHost(
 
   const shadow = host.attachShadow({ mode: "open" });
 
-  const applyTheme = (theme: ThemeMode) => {
-    shadow.host.classList.remove("theme-light", "theme-dark");
-    shadow.host.classList.add(`theme-${theme}`);
-  };
+  let cleanupThemeWatch: (() => void) | null = null;
 
-  applyTheme(detectHostTheme());
-  const cleanupThemeWatch = watchHostTheme(applyTheme);
+  if (!skipThemeWatch) {
+    const applyTheme = (theme: ThemeMode) => {
+      shadow.host.classList.remove("theme-light", "theme-dark");
+      shadow.host.classList.add(`theme-${theme}`);
+    };
+
+    applyTheme(detectHostTheme());
+    cleanupThemeWatch = watchHostTheme(applyTheme);
+  }
 
   const style = document.createElement("style");
   style.textContent = additionalStyles;
@@ -59,7 +67,7 @@ export function createShadowHost(
   shadow.appendChild(mountPoint);
 
   const cleanup = () => {
-    cleanupThemeWatch();
+    cleanupThemeWatch?.();
     host.remove();
   };
 

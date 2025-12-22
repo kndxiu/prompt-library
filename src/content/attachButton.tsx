@@ -7,6 +7,7 @@ import { NavigationProvider } from "@shared/contexts";
 import { getSiteProvider } from "@shared/sites";
 import { createShadowHost } from "@content/bootstrap";
 import { siteThemes } from "@shared/theme/sites";
+import { detectHostTheme, watchHostTheme } from "@shared/theme";
 
 export const attachButton = (input: HTMLElement) => {
   const provider = getSiteProvider();
@@ -20,7 +21,21 @@ export const attachButton = (input: HTMLElement) => {
     cleanup: cleanupHost,
   } = createShadowHost({
     additionalStyles: buttonStyles + themeCss,
+    skipThemeWatch: true,
   });
+
+  const updateTheme = () => {
+    const localTheme = provider.detectLocalTheme?.(input);
+    const theme = localTheme ?? detectHostTheme();
+
+    host.classList.remove("theme-light", "theme-dark");
+    host.classList.add(`theme-${theme}`);
+  };
+
+  updateTheme();
+
+  const cleanupGlobalWatch = watchHostTheme(updateTheme);
+  const cleanupLocalWatch = provider.watchLocalTheme?.(input, updateTheme);
 
   let root: Root | null = createRoot(mountPoint);
 
@@ -36,6 +51,8 @@ export const attachButton = (input: HTMLElement) => {
 
   const cleanup = () => {
     cleanupHost();
+    cleanupGlobalWatch();
+    cleanupLocalWatch?.();
     if (root) {
       root.unmount();
       root = null;
